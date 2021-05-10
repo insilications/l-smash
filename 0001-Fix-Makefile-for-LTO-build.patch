@@ -1,0 +1,40 @@
+From 084382ed7805606d122380a2a698dfd657ea82fd Mon Sep 17 00:00:00 2001
+From: insilications <boboniboni@gmail.com>
+Date: Fri, 31 Jul 2020 09:18:57 -0300
+Subject: [PATCH] Fix Makefile for LTO build
+
+---
+ configure | 9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
+
+diff --git a/configure b/configure
+index de5faed..319ae04 100755
+--- a/configure
++++ b/configure
+@@ -93,10 +93,11 @@ CROSS=""
+ 
+ SYSROOT=""
+ CC="gcc"
+-AR="ar"
+ LD="gcc"
+-RANLIB="ranlib"
+-STRIP="strip"
++AR="gcc-ar"
++RANLIB="gcc-ranlib"
++NM="gcc-nm"
++STRIP="/bin/true"
+ 
+ DEBUG=""
+ 
+@@ -282,7 +283,7 @@ if test -n "$DEBUG"; then
+     CFLAGS="$CFLAGS -g3 -O0"
+     STRIP=""
+ else
+-    CFLAGS="-Os -ffast-math $CFLAGS"
++    CFLAGS="-O3 -ffast-math $CFLAGS"
+ fi
+ 
+ 
+-- 
+2.27.0
+
